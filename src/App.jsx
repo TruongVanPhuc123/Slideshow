@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import Slideshow from "@/components/Slideshow";
 
 import {
@@ -21,7 +20,9 @@ import GenerateSlide from "./components/GenerateSlide";
 function App() {
   const [images, setImages] = useState([]);
   const [showSlideshow, setShowSlideshow] = useState(false);
-  const [timeSlide, setTimeSlide] = useState(3000);
+  const [timeSlide, setTimeSlide] = useState(1); // phút
+  const [timeFix, setTimeFix] = useState(60000); // milliseconds
+  console.log(timeFix);
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -51,12 +52,18 @@ function App() {
     setShowSlideshow(true);
   };
 
+  useEffect(() => {
+    setTimeFix(timeSlide * 60000);
+  }, [timeSlide]);
+
   return (
     <div className="min-h-screen bg-muted px-6 py-10">
       {showSlideshow ? (
         <Slideshow
           images={images.map((img) => img.url)}
           timeSlide={timeSlide}
+          setTimeFix={setTimeFix}
+          timeFix={timeFix}
         />
       ) : (
         <div className="max-w-6xl mx-auto">

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-function Slideshow({ images, timeSlide }) {
+function Slideshow({ images, timeFix }) {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, timeSlide);
+    }, timeFix);
 
     return () => clearInterval(timer);
-  }, [images.length, timeSlide]);
+  }, [images.length]);
 
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % images.length);
