@@ -75,14 +75,6 @@ function Slideshow({ images, onExit }) {
       >
         ›
       </button>
-
-      {/* <Button
-        onClick={handleExit}
-        variant="secondary"
-        className="absolute top-6 right-6 bg-white text-black hover:bg-gray-200 z-10"
-      >
-        Thoát trình chiếu
-      </Button> */}
     </div>
   );
 }
