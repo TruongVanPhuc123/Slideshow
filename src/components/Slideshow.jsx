@@ -1,51 +1,23 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-function Slideshow({ images, onExit }) {
+function Slideshow({ images, timeSlide }) {
   const [current, setCurrent] = useState(0);
-  const [hasLooped, setHasLooped] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((prev) => {
-        const next = prev + 1;
-        if (next >= images.length) {
-          setHasLooped(true);
-          return prev;
-        }
-        return next;
-      });
-    }, 3000);
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, timeSlide);
 
     return () => clearInterval(timer);
-  }, [images.length]);
-
-  useEffect(() => {
-    if (hasLooped) {
-      handleExit();
-    }
-  }, [hasLooped]);
+  }, [images.length, timeSlide]);
 
   const handleNext = () => {
-    setCurrent((prev) => {
-      const next = prev + 1;
-      if (next >= images.length) {
-        setHasLooped(true);
-        return prev;
-      }
-      return next;
-    });
+    setCurrent((prev) => (prev + 1) % images.length);
   };
 
   const handlePrev = () => {
     setCurrent((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  const handleExit = () => {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    }
-    onExit();
   };
 
   return (

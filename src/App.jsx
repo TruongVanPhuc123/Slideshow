@@ -16,10 +16,12 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import SortableImage from "@/components/SorttableImage";
+import GenerateSlide from "./components/GenerateSlide";
 
 function App() {
   const [images, setImages] = useState([]);
   const [showSlideshow, setShowSlideshow] = useState(false);
+  const [timeSlide, setTimeSlide] = useState(3000);
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -28,11 +30,6 @@ function App() {
       url: URL.createObjectURL(file),
     }));
     setImages([...images, ...newImages]);
-  };
-
-  const handleRemove = (id) => {
-    console.log(id);
-    setImages((prev) => prev.filter((img) => img.id !== id));
   };
 
   const sensors = useSensors(useSensor(PointerSensor));
@@ -59,7 +56,7 @@ function App() {
       {showSlideshow ? (
         <Slideshow
           images={images.map((img) => img.url)}
-          onExit={() => setShowSlideshow(false)}
+          timeSlide={timeSlide}
         />
       ) : (
         <div className="max-w-6xl mx-auto">
@@ -67,15 +64,12 @@ function App() {
             🖼️ Tải ảnh từ máy
           </h1>
 
-          <div className="flex justify-center mb-6">
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleFileChange}
-              className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
-            />
-          </div>
+          <GenerateSlide
+            handleFileChange={handleFileChange}
+            images={images}
+            timeSlide={timeSlide}
+            setTimeSlide={setTimeSlide}
+          />
 
           {images.length > 0 && (
             <>
@@ -94,7 +88,7 @@ function App() {
                         key={img.id}
                         id={img.id}
                         src={img.url}
-                        onRemove={handleRemove}
+                        setImages={setImages}
                       />
                     ))}
                   </div>
