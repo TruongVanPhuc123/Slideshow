@@ -17,7 +17,7 @@ export default function PlaybackControls({
 }) {
   const handlePlayPause = () => {
     if (useScheduling && activeScheduledGroup === null) {
-      toast.error("Không có nhóm nào được lên lịch cho thởi điểm hiện tại");
+      toast.error("Haven't scheduled any groups yet.");
       return;
     }
 
@@ -64,7 +64,9 @@ export default function PlaybackControls({
         size="icon"
         className="h-12 w-12"
         onClick={handlePlayPause}
-        disabled={groups.length === 0 || groups.every((g) => g.images.length === 0)}
+        disabled={
+          groups.length === 0 || groups.every((g) => g.images.length === 0)
+        }
       >
         {isPlaying ? (
           <Pause className="h-6 w-6" />

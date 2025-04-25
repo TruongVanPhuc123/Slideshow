@@ -27,7 +27,7 @@ export default function SlideSpeed({ speed, setSpeed, timeUnit, setTimeUnit }) {
           value={[speed]}
           onValueChange={(value) => setSpeed(value[0])}
           min={1}
-          max={timeUnit === "seconds" ? 10 : 5}
+          max={timeUnit === "seconds" ? 60 : 30}
           step={1}
           className="w-full"
         />

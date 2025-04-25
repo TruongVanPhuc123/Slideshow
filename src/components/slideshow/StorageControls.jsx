@@ -30,10 +30,10 @@ export default function StorageControls({
         JSON.stringify(useScheduling)
       );
 
-      toast.success(`Saved ${groups.length} groups to local storage.`);
+      toast.success(`Successfully saved ${groups.length} groups.`);
     } catch (error) {
-      console.error("Error saving to localStorage:", error);
-      toast.error("Failed to save slideshow data to local storage.");
+      console.error("Error occurred while saving:", error);
+      toast.error("Could not save slideshow data.");
     }
   };
 
@@ -48,7 +48,9 @@ export default function StorageControls({
       setIsPlaying(false);
       setUseScheduling(false);
 
-      toast.success("All slideshow data has been cleared from local storage.");
+      toast.success("All slideshow data has been cleared from local storage.", {
+        duration: 3000,
+      });
     } catch (error) {
       console.error("Error clearing localStorage:", error);
       toast.error("Failed to clear saved slideshow data.");
