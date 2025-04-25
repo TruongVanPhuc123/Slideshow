@@ -36,7 +36,7 @@ export default function SlideSpeed({ speed, setSpeed, timeUnit, setTimeUnit }) {
           <span className="px-2 py-1 bg-primary/10 rounded text-primary font-medium">
             {speed} {timeUnit === "seconds" ? "giây" : "phút"}
           </span>
-          <span>{timeUnit === "seconds" ? "10 giây" : "5 phút"}</span>
+          <span>{timeUnit === "seconds" ? "60 giây" : "30 phút"}</span>
         </div>
       </div>
     </div>
